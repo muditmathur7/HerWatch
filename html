@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerWatch</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main Page -->
+    <div class="container" id="main-page">
+        <div class="logo">
+            <!-- Replace 'logo.png' with the actual path to your image -->
+            <img src="c:/Users/mvyas/OneDrive/Desktop/node.js/logo.png" alt="Camera Icon">
+        </div>
+        <div class="auth-buttons">
+            <button id="login-btn">LOG IN</button>
+            <button onclick="goToPage(1)">SIGN UP</button>
+        </div>
+    </div>
 
+    <!-- Sign Up Page 1 -->
+    <div class="container hidden" id="page1">
+        <h2>Sign Up</h2>
+        <input type="email" placeholder="Enter your mail Id" id="email">
+        <input type="text" placeholder="Enter OTP" id="otp">
+        <button onclick="goToPage(2)">VERIFY</button>
+        <button onclick="goToPage(0)">BACK</button>
+    </div>
