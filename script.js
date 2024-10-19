@@ -10,6 +10,11 @@ window.onload = function() {
     document.getElementById('signUpButton').addEventListener('click', () => {
       window.location.href = 'signup-step1.html'; // First sign-up page (Step 1)
     });
+
+    // Redirect to the login page on "Log In" button click
+    document.getElementById('loginButton').addEventListener('click', () => {
+        window.location.href = 'login.html'; // Redirect to login page
+      });
   };
   
   // Validation and navigation between forms
@@ -68,7 +73,6 @@ window.onload = function() {
       return false;
     }
     
-    alert('Account created successfully!');
-    return true;
+    // alert('Account created successfully!');
+    // return true;
   }
-  
