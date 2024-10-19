@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Username - HerWatch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="form-container">
+    <h1>Create Username</h1>
+    <form id="create-username-form" onsubmit="return validateForm()">
+      <div class="input-container">
+        <label for="username">Create Username</label>
+        <input type="text" id="username" name="username" placeholder="xyz_example_123" required>
+      </div>
+      <div class="input-container">
+        <label for="password">Create Password</label>
+        <input type="password" id="password" name="password" placeholder="********" required>
+      </div>
+      <button type="submit" class="submit-button">SUBMIT</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        alert("All fields are mandatory!");
+        return false;
+      }
+      alert('Account created successfully!');
+      return true;
+    }
+  </script>
+
+</body>
+</html>
