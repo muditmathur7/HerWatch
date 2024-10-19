@@ -15,5 +15,4 @@ exec sp_help 'user_details';
 Select * from user_details;
 insert into user_details values('pranatikackar2626@gmail.com','Pranati','Kackar',20,8005917713,'Pranati26','pranu',1234);
 insert into user_details values('mvyas1302@gmail.com','Mayank','Vyas',21,9370664741,'Mayank13','mayank',1234);
-delete from user_details where Age=20;
-select * from user_details order by Age desc;
+
