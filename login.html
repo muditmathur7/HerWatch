@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - HerWatch</title>
+  <link rel="stylesheet" href="style.css"> <!-- Assuming you have a shared CSS file -->
+</head>
+<body>
+
+  <div class="container">
+    <h1>Log In</h1>
+    <form id="login-form">
+      <label for="username">Enter your username</label>
+      <input type="text" id="username" placeholder="xyz_example_123" required>
+      
+      <label for="password">Enter password</label>
+      <input type="password" id="password" placeholder="" required>
+
+      <button type="submit" class="btn">LOG IN</button>
+      <a href="#" class="forgot-password-link">Forgotten Password?</a> <!-- Forgot Password Link -->
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Placeholder login validation
+      if (username !== '' && password !== '') {
+        alert('Login Successful!');
+        window.location.href = 'dashboard.html'; // Redirect to the dashboard or homepage
+      } else {
+        alert('Please enter both username and password.');
+      }
+    });
+  </script>
+
+</body>
+</html>
