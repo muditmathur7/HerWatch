@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms & Conditions</title>
+  <style>
+    /* General styling */
+    body {
+      background-color: #f2e9f2;
+      font-family: Arial, sans-serif;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Container with curved white box and blue outline */
+    .container {
+      width: 90%; /* Adjust width for responsiveness */
+      max-width: 400px;
+      background-color: white;
+      border-radius: 15px;
+      border: 2px solid #4A90E2;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    /* Scrollable Terms section */
+    .terms {
+      max-height: 300px; /* Limits the height, making it scrollable */
+      overflow-y: auto;
+      margin-bottom: 10px;
+      padding-right: 10px; /* Extra padding for smooth scrolling */
+    }
+
+    /* Styling for the checkbox and button */
+    input[type="checkbox"] {
+      margin: 10px 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 10px;
+    }
+    button:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 style="text-align: center;">Terms & Conditions</h1>
+    <div class="terms">
+      <p><strong>1. Location Access:</strong> By using this app, you agree to provide continuous access to your live GPS location. This feature is essential for the proper functioning of safety alerts and real-time location tracking during emergencies.</p>
+      <p><strong>2. SOS Alert Functionality:</strong> When the SOS alert is activated, the app will automatically access your:</p>
+      <ul>
+        <li>Call logs: To notify your emergency contacts and authorities.</li>
+        <li>Camera and microphone: To capture photos, videos, or audio for safety evidence.</li>
+        <li>Recording capabilities: To record audio or video during emergencies.</li>
+      </ul>
+      <p><strong>3. Consent to Data Access:</strong> By agreeing to these terms, you grant permission for the app to access and utilize the above data to ensure your safety. Your information will be handled with the utmost confidentiality and used only for emergency purposes or as required by law.</p>
+      <p><strong>4. Privacy Protection:</strong> The app is designed to prioritize your privacy and security. None of your personal data will be shared with third parties unless required by law or in case of an emergency.</p>
+      <p><strong>5. Deactivation:</strong> You can deactivate or revoke permissions at any time through the app settings, but this may limit the functionality and effectiveness of the safety features.</p>
+      <p>☑ By proceeding, you acknowledge that you have read and understood these terms and agree to provide the required permissions to use the app.</p>
+    </div>
+    <input type="checkbox" id="termsCheckbox"> I agree to the Terms & Conditions<br><br>
+    <button id="acceptButton" disabled>ACCEPT</button>
+  </div>
+
+  <script>
+    const checkbox = document.getElementById('termsCheckbox');
+    const acceptButton = document.getElementById('acceptButton');
+
+    // Enable the button only when the checkbox is checked
+    checkbox.addEventListener('change', () => {
+      acceptButton.disabled = !checkbox.checked;
+    });
+
+    // Alert message on clicking the Accept button
+    acceptButton.addEventListener('click', () => {
+      alert('Account created successfully!');
+    });
+  </script>
+
+</body>
+</html>
