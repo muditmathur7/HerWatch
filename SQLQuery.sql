@@ -5,7 +5,7 @@ Email_id varchar(100) not null UNIQUE,
 First_name varchar(100) not null,
 Last_name varchar(100),
 Age int not null,
-Phone_number varchar(100) primary key,
+Phone_number int primary key,
 username varchar(100) UNIQUE,
 password varchar(100) not null,
 pin int not null
