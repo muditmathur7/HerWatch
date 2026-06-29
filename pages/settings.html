@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | HERWATCH</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <img src="../assets/images/LOGO.png" alt="">
+            <h2>HERWATCH</h2>
+        </div>
+
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="contacts.html"><i class="fas fa-users"></i> Contacts</a></li>
+            <li><a href="reports.html"><i class="fas fa-flag"></i> Reports</a></li>
+            <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="login.html" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+
+    </aside>
+
+    <main class="dashboard-main">
+
+        <div class="settings-container">
+
+            <h1>Settings</h1>
+
+            <div class="setting-card">
+
+                <div class="setting-row">
+                    <span><i class="fas fa-moon"></i> Dark Mode</span>
+
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-bell"></i> Notifications</span>
+
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-lock"></i> Change Password</span>
+                    <button class="small-btn">Change</button>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-info-circle"></i> About HERWATCH</span>
+                    <button class="small-btn" id="aboutBtn">View</button>
+                </div>
+
+            </div>
+
+            <div class="about-card" id="aboutCard">
+
+                <h3>About HERWATCH</h3>
+
+                <p>
+                    HERWATCH is a women safety platform designed to
+                    provide emergency assistance, incident reporting,
+                    trusted contacts management and enhanced safety
+                    awareness.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../js/settings.js"></script>
+
+</body>
+</html>
