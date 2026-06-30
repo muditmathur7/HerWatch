@@ -1,1 +1,53 @@
-<p>dashboard works!</p>
+<div class="dashboard-container">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="dashboard-main">
+
+        <div class="welcome-card">
+            <h1>Welcome, <span>{{ username }}</span> 👋</h1>
+            <p>Your safety is our highest priority.</p>
+        </div>
+
+        <section class="sos-section">
+          <button class="sos-button" (click)="onSOSClick()">SOS</button>
+          <br><br>
+          <p *ngIf="!confirmingSOS()">Press only during emergencies</p>
+          <p *ngIf="confirmingSOS()" style="color:#ff3b30; font-weight:600;">
+            Tap again within {{ countdown() }}s to confirm
+          </p>
+        </section>
+
+        <section>
+            <h2>Quick Actions</h2>
+            <div class="action-grid">
+                <div class="action-card" routerLink="/contacts">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Add Contact</h3>
+                </div>
+                <div class="action-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Share Location</h3>
+                </div>
+                <div class="action-card" routerLink="/reports">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Report Incident</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="activity-section">
+            <h2>Recent Activity</h2>
+            <div class="activity-card">No recent activities found.</div>
+        </section>
+
+        <section class="tips-section">
+            <h2>Safety Tips</h2>
+            <div class="activity-card">
+                Always share your live location with trusted contacts while travelling alone.
+            </div>
+        </section>
+
+    </main>
+
+</div>

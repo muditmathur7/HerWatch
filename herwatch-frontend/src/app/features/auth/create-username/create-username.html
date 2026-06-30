@@ -1,1 +1,23 @@
-<p>create-username works!</p>
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <img src="assets/images/LOGO.png" alt="Logo" class="auth-logo">
+
+        <h1>Create Username</h1>
+        <p>Choose a unique username</p>
+
+        <form (ngSubmit)="onContinue()">
+
+            <div class="input-group">
+                <i class="fas fa-user-tag"></i>
+                <input type="text" [(ngModel)]="username" name="username" placeholder="Enter Username" required>
+            </div>
+
+            <button type="submit" class="auth-btn">Continue</button>
+
+        </form>
+
+    </div>
+
+</div>

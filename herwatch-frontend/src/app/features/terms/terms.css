@@ -1,0 +1,59 @@
+.terms-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2e9f2;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 90%;
+    max-width: 400px;
+    background-color: white;
+    border-radius: 15px;
+    border: 2px solid #4A90E2;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.terms {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 10px;
+    color: #333;
+}
+
+.terms p, .terms ul {
+    margin-bottom: 10px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #333;
+}
+
+input[type="checkbox"] {
+    margin: 10px 0;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}

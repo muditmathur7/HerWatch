@@ -13,6 +13,7 @@ import { ContactsComponent } from './features/contacts/contacts';
 import { ReportsComponent } from './features/reports/reports';
 import { SettingsComponent } from './features/settings/settings';
 import { TermsComponent } from './features/terms/terms';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
 
@@ -28,17 +29,17 @@ export const routes: Routes = [
 
   { path: 'setup-pin', component: SetupPinComponent },
 
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
 
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
 
-  { path: 'contacts', component: ContactsComponent },
+  { path: 'contacts', component: ContactsComponent, canActivate: [authGuard] },
 
-  { path: 'reports', component: ReportsComponent },
+  { path: 'reports', component: ReportsComponent, canActivate: [authGuard] },
 
-  { path: 'settings', component: SettingsComponent },
+  { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
 
-  { path: 'terms', component: TermsComponent },
+  { path: 'terms', component: TermsComponent, canActivate: [authGuard] },
 
   { path: '**', redirectTo: '' }
 

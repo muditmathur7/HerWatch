@@ -1,1 +1,52 @@
-<p>signup-step1 works!</p>
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <img src="assets/images/LOGO.png" alt="Logo" class="auth-logo">
+
+        <h1>Create Account</h1>
+        <p>Step 1 of 2</p>
+
+        <form (ngSubmit)="onNext()">
+
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" [(ngModel)]="phone" name="phone" placeholder="Phone Number" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-calendar"></i>
+                <input type="number" [(ngModel)]="age" name="age" placeholder="Age" min="1" max="100" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-venus"></i>
+                <select [(ngModel)]="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option>Female</option>
+                    <option>Male</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="auth-btn">Next</button>
+
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+
+    </div>
+
+</div>

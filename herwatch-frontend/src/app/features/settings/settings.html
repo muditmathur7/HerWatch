@@ -1,1 +1,53 @@
-<p>settings works!</p>
+<div class="dashboard-container">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="dashboard-main">
+
+        <div class="settings-container">
+
+            <h1>Settings</h1>
+
+            <div class="setting-card">
+
+                <div class="setting-row">
+                    <span><i class="fas fa-moon"></i> Dark Mode</span>
+                    <label class="switch">
+                        <input type="checkbox" [checked]="darkMode" (change)="toggleDarkMode($any($event.target).checked)">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-bell"></i> Notifications</span>
+                    <label class="switch">
+                        <input type="checkbox" [(ngModel)]="notifications">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-lock"></i> Change Password</span>
+                    <button class="small-btn">Change</button>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-info-circle"></i> About HERWATCH</span>
+                    <button class="small-btn" (click)="showAbout = !showAbout">View</button>
+                </div>
+
+            </div>
+
+            <div class="about-card" *ngIf="showAbout">
+                <h3>About HERWATCH</h3>
+                <p>
+                    HERWATCH is a women safety platform designed to provide emergency assistance,
+                    incident reporting, trusted contacts management and enhanced safety awareness.
+                </p>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

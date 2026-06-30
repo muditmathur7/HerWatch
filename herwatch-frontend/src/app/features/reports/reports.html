@@ -1,1 +1,51 @@
-<p>reports works!</p>
+<div class="dashboard-container">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="dashboard-main">
+
+        <div class="reports-container">
+
+            <h1>Report an Incident</h1>
+
+            <form (ngSubmit)="submitReport()">
+
+                <div class="input-group">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <select [(ngModel)]="newReport.type" name="incidentType" required>
+                        <option value="">Select Incident Type</option>
+                        <option>Harassment</option>
+                        <option>Stalking</option>
+                        <option>Theft</option>
+                        <option>Unsafe Area</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" [(ngModel)]="newReport.location" name="incidentLocation" placeholder="Location" required>
+                </div>
+
+                <div class="input-group">
+                    <textarea [(ngModel)]="newReport.description" name="incidentDescription" placeholder="Describe the incident..." rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="auth-btn">Submit Report</button>
+
+            </form>
+
+            <div class="reports-list">
+                <div class="report-card" *ngFor="let r of reports">
+                    <strong>{{ r.type }}</strong> at {{ r.location }} — {{ r.description }}
+                </div>
+                <div class="activity-card" *ngIf="reports.length === 0">
+                    No reports submitted yet.
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

@@ -1,1 +1,30 @@
-<p>setup-pin works!</p>
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <img src="assets/images/LOGO.png" alt="Logo" class="auth-logo">
+
+        <h1>Setup Security PIN</h1>
+        <p>Create a 4-digit PIN for quick authentication</p>
+
+        <form (ngSubmit)="onSubmit()">
+
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" [(ngModel)]="pin" name="pin" placeholder="Enter 4 Digit PIN" maxlength="4" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" [(ngModel)]="confirmPin" name="confirmPin" placeholder="Confirm PIN" maxlength="4" required>
+            </div>
+
+            <p *ngIf="error" style="color:#fff;margin-bottom:15px;">{{ error }}</p>
+
+            <button type="submit" class="auth-btn">Complete Registration</button>
+
+        </form>
+
+    </div>
+
+</div>

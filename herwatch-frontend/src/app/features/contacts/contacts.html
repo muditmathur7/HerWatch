@@ -1,1 +1,41 @@
-<p>contacts works!</p>
+<div class="dashboard-container">
+
+    <app-sidebar></app-sidebar>
+
+    <main class="dashboard-main">
+
+        <div class="contacts-container">
+
+            <h1>Emergency Contacts</h1>
+
+            <form (ngSubmit)="addContact()">
+
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" [(ngModel)]="newContact.name" name="contactName" placeholder="Contact Name" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-phone"></i>
+                    <input type="text" [(ngModel)]="newContact.phone" name="contactPhone" placeholder="Phone Number" required>
+                </div>
+
+                <button type="submit" class="auth-btn">Add Contact</button>
+
+            </form>
+
+            <div class="contacts-list">
+                <div class="contact-card" *ngFor="let c of contacts">
+                  <span>{{ c.name }} — {{ c.phone }}</span>
+                  <button class="delete-btn" (click)="removeContact(c)">Delete</button>
+                </div>
+                <div class="activity-card" *ngIf="contacts.length === 0">
+                    No contacts added yet.
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

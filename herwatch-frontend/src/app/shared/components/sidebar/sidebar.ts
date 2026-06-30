@@ -1,9 +1,19 @@
 import { Component } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.css',
+  styleUrl: './sidebar.css'
 })
-export class Sidebar {}
+export class SidebarComponent {
+
+  constructor(private auth: AuthService, private router: Router) {}
+
+  onLogout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
+}

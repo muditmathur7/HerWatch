@@ -1,1 +1,40 @@
-<p>signup-step2 works!</p>
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <img src="assets/images/LOGO.png" alt="Logo" class="auth-logo">
+
+        <h1>Create Account</h1>
+        <p>Step 2 of 2</p>
+
+        <form (ngSubmit)="onNext()">
+
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" [(ngModel)]="email" name="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password" placeholder="Create Password" required>
+                <i class="fas fa-eye toggle-password" (click)="showPassword = !showPassword"></i>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+
+            <p *ngIf="error" style="color:#fff;margin-bottom:15px;">{{ error }}</p>
+
+            <button type="submit" class="auth-btn">Next</button>
+
+        </form>
+
+        <div class="auth-footer">
+            <p>Already have an account? <a routerLink="/login">Login</a></p>
+        </div>
+
+    </div>
+
+</div>
