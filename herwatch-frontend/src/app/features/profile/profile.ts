@@ -17,7 +17,7 @@ export class ProfileComponent {
 
   constructor(private userService: UserService) {
     this.profile = this.userService.getUser() ?? {
-      name: '', username: '', email: '', phone: '', age: null, gender: ''
+      name: '', username: '', email: '', phone: '', age: null, gender: '', password: ''
     };
     this.backup = { ...this.profile };
   }

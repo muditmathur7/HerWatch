@@ -26,10 +26,35 @@
                     </label>
                 </div>
 
-                <div class="setting-row">
-                    <span><i class="fas fa-lock"></i> Change Password</span>
-                    <button class="small-btn">Change</button>
-                </div>
+                <div class="setting-row" style="flex-direction:column; align-items:stretch;">
+
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span><i class="fas fa-lock"></i> Change Password</span>
+        <button class="small-btn" (click)="showChangePassword = !showChangePassword">
+            {{ showChangePassword ? 'Cancel' : 'Change' }}
+        </button>
+    </div>
+
+    <div *ngIf="showChangePassword" style="margin-top:15px;">
+
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" [(ngModel)]="currentPassword" name="currentPassword" placeholder="Current Password">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" [(ngModel)]="newPassword" name="newPassword" placeholder="New Password">
+        </div>
+
+        <p *ngIf="passwordError" style="color:#ff3b30;">{{ passwordError }}</p>
+        <p *ngIf="passwordSuccess" style="color:green;">{{ passwordSuccess }}</p>
+
+        <button class="small-btn" (click)="changePassword()">Update Password</button>
+
+    </div>
+
+</div>
 
                 <div class="setting-row">
                     <span><i class="fas fa-info-circle"></i> About HERWATCH</span>

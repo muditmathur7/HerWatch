@@ -43,21 +43,29 @@ export class AuthService {
       email: data.email,
       phone: data.phone,
       age: data.age,
-      gender: data.gender
+      gender: data.gender,
+      password: data.password
     };
 
-    // TODO: replace with real backend registration call
     this.userService.saveUser(profile);
     this.signupData = {};
     this.storage.setItem(SESSION_KEY, true);
   }
 
   login(email: string, password: string): boolean {
-    // TODO: replace with real backend auth call (password isn't verified yet, no backend to check against)
     const user = this.userService.getUser();
-    if (!user || user.email !== email) return false;
+    if (!user || user.email !== email || user.password !== password) return false;
 
     this.storage.setItem(SESSION_KEY, true);
+    return true;
+  }
+
+  changePassword(currentPassword: string, newPassword: string): boolean {
+    const user = this.userService.getUser();
+    if (!user || user.password !== currentPassword) return false;
+
+    user.password = newPassword;
+    this.userService.saveUser(user);
     return true;
   }
 

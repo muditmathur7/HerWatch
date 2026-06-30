@@ -26,6 +26,15 @@
 
             <div *ngIf="editMode">
 
+                <div class="detail-row" style="border-bottom:none;">
+                    <strong>Username:</strong> <span>{{ profile.username }}</span>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" [(ngModel)]="profile.email" name="email" placeholder="Email">
+                </div>
+
                 <div class="input-group">
                     <i class="fas fa-phone"></i>
                     <input type="tel" [(ngModel)]="profile.phone" name="phone" placeholder="Phone Number">

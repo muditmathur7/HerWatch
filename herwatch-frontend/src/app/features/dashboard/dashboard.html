@@ -21,20 +21,21 @@
         <section>
             <h2>Quick Actions</h2>
             <div class="action-grid">
-                <div class="action-card" routerLink="/contacts">
+                <div class="action-card" routerLink="/contacts" style="cursor:pointer;">
                     <i class="fas fa-user-plus"></i>
                     <h3>Add Contact</h3>
                 </div>
-                <div class="action-card">
+                <div class="action-card" (click)="shareLocation()" style="cursor:pointer;">
                     <i class="fas fa-map-marker-alt"></i>
                     <h3>Share Location</h3>
                 </div>
-                <div class="action-card" routerLink="/reports">
+                <div class="action-card" routerLink="/reports" style="cursor:pointer;">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>Report Incident</h3>
                 </div>
             </div>
         </section>
+        <p *ngIf="locationStatus" style="text-align:center; margin-top:15px;">{{ locationStatus }}</p>
 
         <section class="activity-section">
             <h2>Recent Activity</h2>

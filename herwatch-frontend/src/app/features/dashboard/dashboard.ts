@@ -53,4 +53,25 @@ export class DashboardComponent implements OnDestroy {
   ngOnDestroy() {
     clearInterval(this.timer);
   }
+  locationStatus = '';
+
+shareLocation() {
+  if (!navigator.geolocation) {
+    this.locationStatus = 'Geolocation is not supported by your browser';
+    return;
+  }
+
+  this.locationStatus = 'Fetching your location...';
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const { latitude, longitude } = position.coords;
+      // TODO: send this to trusted contacts via backend once available
+      this.locationStatus = `Location: ${latitude.toFixed(5)}, ${longitude.toFixed(5)} (ready to share once contacts are wired to a backend)`;
+    },
+    () => {
+      this.locationStatus = 'Unable to retrieve location. Please allow location access.';
+    }
+  );
+}
 }
