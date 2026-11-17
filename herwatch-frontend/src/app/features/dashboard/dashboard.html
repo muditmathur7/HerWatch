@@ -4,51 +4,109 @@
 
     <main class="dashboard-main">
 
-        <div class="welcome-card">
+        <!-- WELCOME CARD -->
+        <div class="welcome-card" *ngIf="!activeSOS()">
             <h1>Welcome, <span>{{ username }}</span> 👋</h1>
-            <p>Your safety is our highest priority.</p>
+            <p>Your safety is our highest priority. Everything is armed and ready.</p>
         </div>
 
-        <section class="sos-section">
-          <button class="sos-button" (click)="onSOSClick()">SOS</button>
-          <br><br>
-          <p *ngIf="!confirmingSOS()">Press only during emergencies</p>
-          <p *ngIf="confirmingSOS()" style="color:#ff3b30; font-weight:600;">
-            Tap again within {{ countdown() }}s to confirm
-          </p>
+        <!-- EMERGENCY ACTIVE BANNER -->
+        <div class="emergency-banner" *ngIf="activeSOS()">
+            <div class="emergency-header">
+                <i class="fas fa-exclamation-triangle pulse-icon"></i>
+                <div>
+                    <h2>🚨 EMERGENCY SOS ACTIVE</h2>
+                    <p>Alert dispatched to <strong>{{ activeSOS()?.notifiedContactsCount }} trusted contacts</strong> & authorities.</p>
+                    <small>Continuous GPS tracking is actively broadcasting your live coordinates.</small>
+                </div>
+            </div>
+            <button class="disarm-btn" (click)="openDisarmModal()">
+                <i class="fas fa-check-circle"></i> I Am Safe / Disarm SOS
+            </button>
+        </div>
+
+        <!-- SOS TRIGGER SECTION -->
+        <section class="sos-section" *ngIf="!activeSOS()">
+            <button class="sos-button" [class.confirming]="confirmingSOS()" (click)="onSOSClick()">
+                <span *ngIf="!confirmingSOS()">SOS</span>
+                <span *ngIf="confirmingSOS()">{{ countdown() }}</span>
+            </button>
+            <br><br>
+            <p *ngIf="!confirmingSOS()" class="sos-tip">Press to trigger instant emergency dispatch</p>
+            <p *ngIf="confirmingSOS()" class="sos-confirm-text">
+                Tap again within {{ countdown() }}s to confirm emergency!
+            </p>
         </section>
 
+        <!-- ONE-TAP EMERGENCY DIALERS -->
+        <section class="quick-dial-section">
+            <div class="quick-dial-grid">
+                <a *ngFor="let h of quickHelplines" [href]="'tel:' + h.number" class="dial-card">
+                    <i [class]="h.icon"></i>
+                    <div>
+                        <h4>{{ h.name }}</h4>
+                        <strong>{{ h.number }}</strong>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- QUICK ACTION CARDS -->
         <section>
             <h2>Quick Actions</h2>
             <div class="action-grid">
                 <div class="action-card" routerLink="/contacts" style="cursor:pointer;">
                     <i class="fas fa-user-plus"></i>
                     <h3>Add Contact</h3>
+                    <p class="action-desc">Manage trusted network</p>
                 </div>
                 <div class="action-card" (click)="shareLocation()" style="cursor:pointer;">
                     <i class="fas fa-map-marker-alt"></i>
                     <h3>Share Location</h3>
+                    <p class="action-desc">Send GPS to WhatsApp/SMS</p>
                 </div>
                 <div class="action-card" routerLink="/reports" style="cursor:pointer;">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>Report Incident</h3>
+                    <p class="action-desc">Flag unsafe zone or hazard</p>
                 </div>
             </div>
         </section>
-        <p *ngIf="locationStatus" style="text-align:center; margin-top:15px;">{{ locationStatus }}</p>
 
-        <section class="activity-section">
-            <h2>Recent Activity</h2>
-            <div class="activity-card">No recent activities found.</div>
-        </section>
+        <p *ngIf="locationStatus" class="location-status-badge">{{ locationStatus }}</p>
 
+        <!-- SAFETY TIPS -->
         <section class="tips-section">
             <h2>Safety Tips</h2>
             <div class="activity-card">
-                Always share your live location with trusted contacts while travelling alone.
+                <i class="fas fa-lightbulb" style="color:#ffc107; margin-right:8px;"></i>
+                Always share your live location with trusted contacts when travelling alone or in unfamiliar areas at night.
             </div>
         </section>
 
     </main>
+
+    <!-- DISARM MODAL -->
+    <div class="modal-overlay" *ngIf="showDisarmModal">
+        <div class="modal-card">
+            <i class="fas fa-shield-alt modal-icon"></i>
+            <h2>Disarm Emergency SOS</h2>
+            <p>Enter your 4-digit security PIN to confirm you are safe.</p>
+
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" [(ngModel)]="disarmPin" placeholder="4-Digit PIN" maxlength="4" autofocus>
+            </div>
+
+            <p *ngIf="disarmError" class="modal-error">{{ disarmError }}</p>
+
+            <div class="modal-actions">
+                <button class="confirm-disarm-btn" (click)="confirmDisarm()" [disabled]="isDisarming">
+                    {{ isDisarming ? 'Verifying...' : 'Confirm Safe' }}
+                </button>
+                <button class="cancel-modal-btn" (click)="closeDisarmModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
 </div>

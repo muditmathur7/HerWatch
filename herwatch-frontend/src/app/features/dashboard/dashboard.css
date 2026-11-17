@@ -1,0 +1,258 @@
+/* SOS BUTTON ENHANCEMENT */
+.sos-button {
+    width: 190px;
+    height: 190px;
+    border: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ff3b30 0%, #d63031 100%);
+    color: #fff;
+    font-size: 46px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(255, 59, 48, 0.45);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sos-button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 15px 35px rgba(255, 59, 48, 0.55);
+}
+
+.sos-button.confirming {
+    background: radial-gradient(circle, #ff9500 0%, #e67e22 100%);
+    box-shadow: 0 12px 30px rgba(255, 149, 0, 0.5);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+.sos-tip {
+    color: #777;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.sos-confirm-text {
+    color: #ff3b30;
+    font-size: 17px;
+    font-weight: 700;
+    animation: flash 1s infinite alternate;
+}
+
+@keyframes flash {
+    from { opacity: 0.8; }
+    to { opacity: 1; }
+}
+
+/* EMERGENCY ACTIVE BANNER */
+.emergency-banner {
+    background: linear-gradient(135deg, #d63031, #eb2f06);
+    color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(235, 47, 6, 0.4);
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.emergency-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.pulse-icon {
+    font-size: 48px;
+    color: #fffa65;
+    animation: pulse 1.2s infinite;
+}
+
+.emergency-header h2 {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.emergency-header p {
+    font-size: 15px;
+    opacity: 0.95;
+}
+
+.emergency-header small {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.disarm-btn {
+    background: #fff;
+    color: #d63031;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.disarm-btn:hover {
+    transform: translateY(-2px);
+    background: #f8f9fa;
+}
+
+/* QUICK DIAL SECTION */
+.quick-dial-section {
+    margin: 30px 0;
+}
+
+.quick-dial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.dial-card {
+    background: #fff;
+    padding: 16px 20px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    border: 1px solid #eef0f5;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dial-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.dial-card i {
+    font-size: 24px;
+    color: #ff3b30;
+}
+
+.dial-card h4 {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.dial-card strong {
+    font-size: 18px;
+    color: #222;
+}
+
+.action-desc {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+}
+
+.location-status-badge {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4b44d4;
+    background: #eef2ff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+/* MODAL */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-card {
+    background: #fff;
+    padding: 35px;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.modal-icon {
+    font-size: 48px;
+    color: #6c63ff;
+    margin-bottom: 15px;
+}
+
+.modal-card h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.modal-card p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.modal-error {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.confirm-disarm-btn {
+    flex: 1;
+    background: #34c759;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cancel-modal-btn {
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
