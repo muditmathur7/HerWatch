@@ -6,33 +6,106 @@
 
         <div class="contacts-container">
 
-            <h1>Emergency Contacts</h1>
+            <!-- QUICK DIAL HELPLINES -->
+            <section class="helpline-section">
+                <h2>⚡ Emergency One-Tap Helplines</h2>
+                <p class="section-subtitle">Tap any service to call immediately in case of emergency.</p>
+                <div class="helpline-grid">
+                    <a *ngFor="let h of emergencyHelplines" [href]="'tel:' + h.number" class="helpline-card" [style.border-top-color]="h.color">
+                        <i [class]="h.icon" [style.color]="h.color"></i>
+                        <div>
+                            <h4>{{ h.name }}</h4>
+                            <span class="helpline-num">{{ h.number }}</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
 
-            <form (ngSubmit)="addContact()">
+            <!-- ADD TRUSTED CONTACT -->
+            <section class="add-contact-section">
+                <h1>Emergency Contacts</h1>
+                <p class="section-subtitle">Contacts who will receive your live GPS location and SOS alerts instantly.</p>
 
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" [(ngModel)]="newContact.name" name="contactName" placeholder="Contact Name" required>
+                <form (ngSubmit)="addContact()" class="contact-form">
+
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" [(ngModel)]="newContact.name" name="contactName" placeholder="Contact Full Name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" [(ngModel)]="newContact.phone" name="contactPhone" placeholder="Phone Number" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="input-group flex-1">
+                            <i class="fas fa-user-friends"></i>
+                            <select [(ngModel)]="newContact.relationship" name="relationship">
+                                <option value="Family">Family</option>
+                                <option value="Mother">Mother</option>
+                                <option value="Father">Father</option>
+                                <option value="Sibling">Sibling</option>
+                                <option value="Friend">Friend</option>
+                                <option value="Spouse">Spouse / Partner</option>
+                                <option value="Colleague">Colleague</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <label class="primary-checkbox-label">
+                            <input type="checkbox" [(ngModel)]="newContact.isPrimary" name="isPrimary">
+                            <span>Primary Contact</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="auth-btn" [disabled]="isAdding">
+                        {{ isAdding ? 'Adding Contact...' : '+ Add Emergency Contact' }}
+                    </button>
+
+                </form>
+
+                <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+                <p *ngIf="successMessage" class="success-msg">{{ successMessage }}</p>
+            </section>
+
+            <!-- CONTACTS LIST -->
+            <section class="contacts-list-section">
+                <h2>Your Trusted Network ({{ contacts.length }})</h2>
+
+                <div *ngIf="isLoading" class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i> Loading contacts...
                 </div>
 
-                <div class="input-group">
-                    <i class="fas fa-phone"></i>
-                    <input type="text" [(ngModel)]="newContact.phone" name="contactPhone" placeholder="Phone Number" required>
-                </div>
+                <div class="contacts-list" *ngIf="!isLoading">
+                    <div class="contact-card" *ngFor="let c of contacts">
+                        <div class="contact-info">
+                            <div class="contact-header">
+                                <strong>{{ c.name }}</strong>
+                                <span *ngIf="c.isPrimary" class="primary-badge">PRIMARY</span>
+                                <span *ngIf="c.relationship" class="relation-tag">{{ c.relationship }}</span>
+                            </div>
+                            <span class="contact-phone">
+                                <i class="fas fa-phone-alt"></i> {{ c.phone }}
+                            </span>
+                        </div>
+                        <div class="contact-actions">
+                            <a [href]="'tel:' + c.phone" class="call-btn" title="Call Now">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                            <button class="delete-btn" (click)="removeContact(c)" title="Remove Contact">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
 
-                <button type="submit" class="auth-btn">Add Contact</button>
-
-            </form>
-
-            <div class="contacts-list">
-                <div class="contact-card" *ngFor="let c of contacts">
-                  <span>{{ c.name }} — {{ c.phone }}</span>
-                  <button class="delete-btn" (click)="removeContact(c)">Delete</button>
+                    <div class="activity-card empty-state" *ngIf="contacts.length === 0">
+                        <i class="fas fa-user-shield"></i>
+                        <p>No emergency contacts added yet.</p>
+                        <small>Add at least 2 trusted contacts so they can be notified when you press the SOS button.</small>
+                    </div>
                 </div>
-                <div class="activity-card" *ngIf="contacts.length === 0">
-                    No contacts added yet.
-                </div>
-            </div>
+            </section>
 
         </div>
 

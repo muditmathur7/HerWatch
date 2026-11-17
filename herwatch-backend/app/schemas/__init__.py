@@ -6,6 +6,11 @@ from app.schemas.user import (
     UserResponse,
     TokenResponse
 )
+from app.schemas.contact import (
+    ContactCreate,
+    ContactUpdate,
+    ContactResponse
+)
 
 __all__ = [
     "UserRegister",
@@ -13,5 +18,8 @@ __all__ = [
     "UserProfileUpdate",
     "PasswordChangeRequest",
     "UserResponse",
-    "TokenResponse"
+    "TokenResponse",
+    "ContactCreate",
+    "ContactUpdate",
+    "ContactResponse"
 ]
