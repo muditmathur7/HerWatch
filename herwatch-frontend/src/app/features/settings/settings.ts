@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, PLATFORM_ID, inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar';
 import { AuthService } from '../../core/services/auth.service';
@@ -12,6 +12,9 @@ import { StorageService } from '../../core/services/storage.service';
   styleUrl: './settings.css'
 })
 export class SettingsComponent {
+  private platformId = inject(PLATFORM_ID);
+  private isBrowser = isPlatformBrowser(this.platformId);
+
   notifications = true;
   showAbout = false;
   showChangePassword = false;
@@ -20,16 +23,22 @@ export class SettingsComponent {
   newPassword = '';
   passwordError = '';
   passwordSuccess = '';
+  isSubmitting = false;
 
   constructor(private auth: AuthService, private storage: StorageService) {}
 
   get darkMode(): boolean {
-    return document.body.classList.contains('dark-mode');
+    if (this.isBrowser) {
+      return document.body.classList.contains('dark-mode');
+    }
+    return false;
   }
 
   toggleDarkMode(checked: boolean) {
-    document.body.classList.toggle('dark-mode', checked);
-    this.storage.setItem('herwatch_dark_mode', checked);
+    if (this.isBrowser) {
+      document.body.classList.toggle('dark-mode', checked);
+      this.storage.setItem('herwatch_dark_mode', checked);
+    }
   }
 
   changePassword() {
@@ -41,13 +50,23 @@ export class SettingsComponent {
       return;
     }
 
-    const success = this.auth.changePassword(this.currentPassword, this.newPassword);
-    if (success) {
-      this.passwordSuccess = 'Password updated successfully';
-      this.currentPassword = '';
-      this.newPassword = '';
-    } else {
-      this.passwordError = 'Current password is incorrect';
+    if (this.newPassword.length < 6) {
+      this.passwordError = 'New password must be at least 6 characters long';
+      return;
     }
+
+    this.isSubmitting = true;
+    this.auth.changePassword(this.currentPassword, this.newPassword).subscribe({
+      next: (res) => {
+        this.isSubmitting = false;
+        this.passwordSuccess = res.message || 'Password updated successfully!';
+        this.currentPassword = '';
+        this.newPassword = '';
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        this.passwordError = err.error?.detail || 'Current password is incorrect';
+      }
+    });
   }
 }

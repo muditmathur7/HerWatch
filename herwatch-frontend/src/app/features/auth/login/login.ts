@@ -14,14 +14,27 @@ export class LoginComponent {
   email = '';
   password = '';
   error = '';
+  isLoading = false;
 
   constructor(private router: Router, private auth: AuthService) {}
 
   onLogin() {
-    if (this.auth.login(this.email, this.password)) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      this.error = 'Invalid email or no account found. Please sign up first.';
+    if (!this.email || !this.password) {
+      this.error = 'Please enter both email and password';
+      return;
     }
+    this.error = '';
+    this.isLoading = true;
+
+    this.auth.login(this.email, this.password).subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.error = err.error?.detail || 'Invalid email or password. Please try again.';
+      }
+    });
   }
 }

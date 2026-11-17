@@ -19,9 +19,11 @@
                 <input type="password" [(ngModel)]="confirmPin" name="confirmPin" placeholder="Confirm PIN" maxlength="4" required>
             </div>
 
-            <p *ngIf="error" style="color:#fff;margin-bottom:15px;">{{ error }}</p>
+            <p *ngIf="error" style="color:#ff6b6b; margin-bottom:15px; font-weight: 500;">{{ error }}</p>
 
-            <button type="submit" class="auth-btn">Complete Registration</button>
+            <button type="submit" class="auth-btn" [disabled]="isLoading">
+                {{ isLoading ? 'Registering...' : 'Complete Registration' }}
+            </button>
 
         </form>
 

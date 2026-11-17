@@ -14,6 +14,7 @@ export class SetupPinComponent {
   pin = '';
   confirmPin = '';
   error = '';
+  isLoading = false;
 
   constructor(private router: Router, private auth: AuthService) {}
 
@@ -27,8 +28,18 @@ export class SetupPinComponent {
       return;
     }
     this.error = '';
+    this.isLoading = true;
     this.auth.updateSignupData({ pin: this.pin });
-    this.auth.completeRegistration();
-    this.router.navigate(['/terms']);
+
+    this.auth.completeRegistration().subscribe({
+      next: () => {
+        this.isLoading = false;
+        this.router.navigate(['/terms']);
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.error = err.error?.detail || 'Registration failed. Please try again.';
+      }
+    });
   }
 }
