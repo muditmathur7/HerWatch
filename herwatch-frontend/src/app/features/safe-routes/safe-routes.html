@@ -14,7 +14,7 @@
             <div class="search-bar-row">
                 <div class="search-input-wrap">
                     <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" [(ngModel)]="destinationSearch" (keyup.enter)="calculateRoute()" placeholder="Enter destination (e.g. Central Metro, University, Home)...">
+                    <input type="text" [(ngModel)]="destinationSearch" (keyup.enter)="calculateRoute()" placeholder="Enter destination">
                 </div>
                 <button class="plan-btn" (click)="calculateRoute()" [disabled]="isLoadingRoute">
                     <i class="fas fa-route"></i> {{ isLoadingRoute ? 'Routing...' : 'Find Safest Route' }}

@@ -1,29 +1,166 @@
-<aside class="sidebar">
+<!-- ================= DESKTOP SIDEBAR (> 900px) ================= -->
+<aside class="desktop-sidebar">
 
     <div class="sidebar-logo">
-        <img src="assets/images/LOGO.png" alt="Logo">
+        <img src="assets/images/LOGO.png" alt="HerWatch Logo">
         <h2>HERWATCH</h2>
+        <div class="desktop-status-pill">
+            <span class="live-dot"></span> System Armed
+        </div>
     </div>
 
-    <ul>
-        <li><a routerLink="/dashboard" routerLinkActive="active"><i class="fas fa-home"></i> Dashboard</a></li>
-        <li><a routerLink="/safe-routes" routerLinkActive="active"><i class="fas fa-route"></i> Safe Routes</a></li>
-        <li><a routerLink="/profile" routerLinkActive="active"><i class="fas fa-user"></i> Profile</a></li>
-        <li><a routerLink="/contacts" routerLinkActive="active"><i class="fas fa-users"></i> Contacts</a></li>
-        <li><a routerLink="/reports" routerLinkActive="active"><i class="fas fa-flag"></i> Reports</a></li>
-        <li><a routerLink="/settings" routerLinkActive="active"><i class="fas fa-cog"></i> Settings</a></li>
-        <li><a (click)="onLogout()" style="cursor:pointer"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+    <ul class="nav-menu">
+        <li><a routerLink="/dashboard" routerLinkActive="active"><i class="fas fa-shield-alt"></i> <span>Dashboard</span></a></li>
+        <li><a routerLink="/safe-routes" routerLinkActive="active"><i class="fas fa-route"></i> <span>Safe Routes</span></a></li>
+        <li><a routerLink="/profile" routerLinkActive="active"><i class="fas fa-user"></i> <span>Profile</span></a></li>
+        <li><a routerLink="/contacts" routerLinkActive="active"><i class="fas fa-users"></i> <span>Contacts</span></a></li>
+        <li><a routerLink="/reports" routerLinkActive="active"><i class="fas fa-flag"></i> <span>Reports</span></a></li>
+        <li><a routerLink="/settings" routerLinkActive="active"><i class="fas fa-cog"></i> <span>Settings</span></a></li>
+        <li><a (click)="onLogout()" class="logout-link"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a></li>
     </ul>
 
-    <!-- STEALTH & DETERRENT TOOLS -->
+    <!-- DESKTOP STEALTH & DETERRENT TOOLS -->
     <div class="sidebar-tools">
+        <div class="tools-title">SAFETY UTILITIES</div>
         <button class="tool-btn stealth-tool-btn" (click)="stealth.activateStealth()" title="Disguise screen as functional calculator">
-            <i class="fas fa-calculator"></i> Disguise Screen
+            <i class="fas fa-calculator"></i>
+            <span>Disguise Screen</span>
         </button>
         <button class="tool-btn siren-tool-btn" [class.siren-on]="stealth.isSirenActive()" (click)="stealth.toggleSiren()" title="Loud audible alarm for public deterrence">
             <i class="fas" [class.fa-bullhorn]="!stealth.isSirenActive()" [class.fa-volume-mute]="stealth.isSirenActive()"></i>
-            {{ stealth.isSirenActive() ? 'Stop Siren' : 'Loud Siren' }}
+            <span>{{ stealth.isSirenActive() ? 'Stop Siren' : 'Loud Siren' }}</span>
         </button>
     </div>
 
 </aside>
+
+<!-- ================= MOBILE TOP APP BAR (<= 900px) ================= -->
+<header class="mobile-top-bar">
+    <div class="topbar-left" routerLink="/dashboard">
+        <img src="assets/images/LOGO.png" alt="HerWatch" class="mobile-app-logo">
+        <div class="mobile-brand-meta">
+            <span class="mobile-app-name">HERWATCH</span>
+            <span class="mobile-armed-badge">
+                <span class="pulse-indicator"></span> ARMED
+            </span>
+        </div>
+    </div>
+
+    <div class="topbar-right">
+        <!-- Quick Disguise Button -->
+        <button class="mobile-action-pill stealth-pill" (click)="stealth.activateStealth()" title="Instant Calculator Disguise">
+            <i class="fas fa-calculator"></i>
+            <span class="pill-text">Disguise</span>
+        </button>
+
+        <!-- Quick Siren Button -->
+        <button class="mobile-action-pill siren-pill" [class.siren-active]="stealth.isSirenActive()" (click)="stealth.toggleSiren()" title="Loud Alarm Siren">
+            <i class="fas" [class.fa-bullhorn]="!stealth.isSirenActive()" [class.fa-volume-mute]="stealth.isSirenActive()"></i>
+            <span class="pill-text">{{ stealth.isSirenActive() ? 'Stop' : 'Siren' }}</span>
+        </button>
+
+        <!-- Profile Avatar -->
+        <a routerLink="/profile" class="mobile-avatar-btn" title="Profile">
+            <i class="fas fa-user-circle"></i>
+        </a>
+    </div>
+</header>
+
+<!-- ================= MOBILE BOTTOM NAVIGATION DOCK (<= 900px) ================= -->
+<nav class="mobile-bottom-nav">
+
+    <!-- TAB 1: HOME -->
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="bottom-tab">
+        <div class="tab-icon-wrap"><i class="fas fa-shield-alt"></i></div>
+        <span class="tab-label">Home</span>
+    </a>
+
+    <!-- TAB 2: SAFE MAP -->
+    <a routerLink="/safe-routes" routerLinkActive="active" class="bottom-tab">
+        <div class="tab-icon-wrap"><i class="fas fa-route"></i></div>
+        <span class="tab-label">Safe Map</span>
+    </a>
+
+    <!-- TAB 3: CENTER ELEVATED SOS BUTTON -->
+    <button class="bottom-tab center-sos-tab" (click)="onCenterSosClick()" title="Instant Emergency SOS">
+        <div class="center-sos-outer-ring">
+            <div class="center-sos-button">
+                <i class="fas fa-bell"></i>
+                <span class="center-sos-text">SOS</span>
+            </div>
+        </div>
+    </button>
+
+    <!-- TAB 4: CONTACTS -->
+    <a routerLink="/contacts" routerLinkActive="active" class="bottom-tab">
+        <div class="tab-icon-wrap"><i class="fas fa-user-friends"></i></div>
+        <span class="tab-label">Contacts</span>
+    </a>
+
+    <!-- TAB 5: MORE SHEET -->
+    <button class="bottom-tab more-tab" (click)="toggleMoreSheet()" [class.active]="isMoreOpen" title="More Options">
+        <div class="tab-icon-wrap"><i class="fas fa-bars"></i></div>
+        <span class="tab-label">More</span>
+    </button>
+
+</nav>
+
+<!-- ================= MOBILE MORE SHEET / DRAWER ================= -->
+<div class="sheet-backdrop" *ngIf="isMoreOpen" (click)="closeMoreSheet()">
+    <div class="sheet-drawer" (click)="$event.stopPropagation()">
+        
+        <div class="sheet-handle-bar">
+            <span class="handle-pill"></span>
+        </div>
+
+        <div class="sheet-header">
+            <div class="sheet-title-info">
+                <h3>HerWatch Quick Menu</h3>
+                <small>Quick tools and safety controls</small>
+            </div>
+            <button class="sheet-close-btn" (click)="closeMoreSheet()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="sheet-grid">
+            <a routerLink="/profile" (click)="closeMoreSheet()" class="sheet-tile">
+                <div class="tile-icon icon-purple"><i class="fas fa-user"></i></div>
+                <span class="tile-name">Profile</span>
+            </a>
+
+            <a routerLink="/reports" (click)="closeMoreSheet()" class="sheet-tile">
+                <div class="tile-icon icon-amber"><i class="fas fa-flag"></i></div>
+                <span class="tile-name">Reports</span>
+            </a>
+
+            <a routerLink="/safe-routes" (click)="closeMoreSheet()" class="sheet-tile">
+                <div class="tile-icon icon-emerald"><i class="fas fa-map-marked-alt"></i></div>
+                <span class="tile-name">Safe Routes</span>
+            </a>
+
+            <a routerLink="/settings" (click)="closeMoreSheet()" class="sheet-tile">
+                <div class="tile-icon icon-blue"><i class="fas fa-cog"></i></div>
+                <span class="tile-name">Settings</span>
+            </a>
+
+            <button (click)="activateStealthFromSheet()" class="sheet-tile">
+                <div class="tile-icon icon-indigo"><i class="fas fa-calculator"></i></div>
+                <span class="tile-name">Disguise</span>
+            </button>
+
+            <button (click)="toggleSirenFromSheet()" class="sheet-tile" [class.tile-siren-active]="stealth.isSirenActive()">
+                <div class="tile-icon icon-rose"><i class="fas fa-bullhorn"></i></div>
+                <span class="tile-name">{{ stealth.isSirenActive() ? 'Stop Siren' : 'Loud Siren' }}</span>
+            </button>
+        </div>
+
+        <div class="sheet-logout-box">
+            <button class="sheet-logout-btn" (click)="onLogout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Sign Out of HerWatch</span>
+            </button>
+        </div>
+
+    </div>
+</div>

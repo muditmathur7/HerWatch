@@ -401,3 +401,27 @@
     0% { transform: scale(0.6); opacity: 1; }
     100% { transform: scale(1.6); opacity: 0; }
 }
+
+@media (max-width: 900px) {
+    .safe-routes-main {
+        padding: 12px;
+        gap: 15px;
+    }
+    .safe-header-card {
+        padding: 18px 16px;
+    }
+    .map-container {
+        height: 340px;
+    }
+    .search-input-wrap {
+        min-width: 100%;
+    }
+    .plan-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .map-legend {
+        font-size: 11px;
+        gap: 10px;
+    }
+}

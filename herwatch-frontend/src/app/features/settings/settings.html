@@ -26,6 +26,18 @@
                     </label>
                 </div>
 
+                <div class="setting-row">
+                    <span><i class="fas fa-calculator"></i> Disguise Screen (Calculator)</span>
+                    <button class="small-btn" (click)="stealth.activateStealth()">Launch</button>
+                </div>
+
+                <div class="setting-row">
+                    <span><i class="fas fa-bullhorn"></i> Emergency Loud Siren</span>
+                    <button class="small-btn" [style.background]="stealth.isSirenActive() ? '#ef4444' : '#6c63ff'" (click)="stealth.toggleSiren()">
+                        {{ stealth.isSirenActive() ? 'Stop Siren' : 'Test Siren' }}
+                    </button>
+                </div>
+
                 <div class="setting-row" style="flex-direction:column; align-items:stretch;">
 
     <div style="display:flex; justify-content:space-between; align-items:center;">

@@ -15,7 +15,7 @@ export class SafeRoutesComponent implements OnInit, AfterViewInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
 
-  destinationSearch = 'Central Metro Station';
+  destinationSearch = '';
   userLat = 28.6139;
   userLng = 77.2090;
   destLat = 28.6300;

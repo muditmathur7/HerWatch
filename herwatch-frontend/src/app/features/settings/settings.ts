@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from '../../shared/components/sidebar/sidebar';
 import { AuthService } from '../../core/services/auth.service';
 import { StorageService } from '../../core/services/storage.service';
+import { StealthService } from '../../core/services/stealth.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,6 +15,7 @@ import { StorageService } from '../../core/services/storage.service';
 export class SettingsComponent {
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
+  public stealth = inject(StealthService);
 
   notifications = true;
   showAbout = false;

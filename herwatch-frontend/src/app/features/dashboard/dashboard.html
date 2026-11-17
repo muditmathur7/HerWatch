@@ -4,88 +4,138 @@
 
     <main class="dashboard-main">
 
-        <!-- WELCOME CARD -->
-        <div class="welcome-card" *ngIf="!activeSOS()">
-            <h1>Welcome, <span>{{ username }}</span> 👋</h1>
-            <p>Your safety is our highest priority. Everything is armed and ready.</p>
+        <!-- MOBILE / RESPONSIVE SAFETY GUARDIAN STATUS CARD -->
+        <div class="safety-status-card" *ngIf="!activeSOS()">
+            <div class="status-top">
+                <div class="user-greeting">
+                    <span class="greeting-sub">Hi, Welcome back</span>
+                    <h1 class="greeting-name">{{ username }} 👋</h1>
+                </div>
+                <div class="live-guardian-badge">
+                    <span class="pulse-ring-dot"></span>
+                    <span>ARMED & READY</span>
+                </div>
+            </div>
+            <div class="status-metrics">
+                <div class="metric-pill">
+                    <i class="fas fa-satellite-dish text-blue"></i>
+                    <span>GPS Active</span>
+                </div>
+                <div class="metric-pill">
+                    <i class="fas fa-shield-alt text-emerald"></i>
+                    <span>Shield Armed</span>
+                </div>
+                <div class="metric-pill">
+                    <i class="fas fa-broadcast-tower text-indigo"></i>
+                    <span>24/7 Monitor</span>
+                </div>
+            </div>
         </div>
 
-        <!-- EMERGENCY ACTIVE BANNER -->
+        <!-- EMERGENCY ACTIVE FULL BANNER -->
         <div class="emergency-banner" *ngIf="activeSOS()">
             <div class="emergency-header">
-                <i class="fas fa-exclamation-triangle pulse-icon"></i>
-                <div>
-                    <h2>🚨 EMERGENCY SOS ACTIVE</h2>
-                    <p>Alert dispatched to <strong>{{ activeSOS()?.notifiedContactsCount }} trusted contacts</strong> & authorities.</p>
+                <div class="emergency-icon-wrap">
+                    <i class="fas fa-exclamation-triangle pulse-icon"></i>
+                </div>
+                <div class="emergency-meta">
+                    <span class="emergency-status-pill">CRITICAL ALERT DISPATCHED</span>
+                    <h2>EMERGENCY SOS ACTIVE</h2>
+                    <p>Alert broadcasted to <strong>{{ activeSOS()?.notifiedContactsCount }} trusted contacts</strong> & local authorities.</p>
                     <small>Continuous GPS tracking is actively broadcasting your live coordinates.</small>
                 </div>
             </div>
             <button class="disarm-btn" (click)="openDisarmModal()">
-                <i class="fas fa-check-circle"></i> I Am Safe / Disarm SOS
+                <i class="fas fa-check-circle"></i>
+                <span>I Am Safe / Disarm SOS</span>
             </button>
         </div>
 
-        <!-- SOS TRIGGER SECTION -->
+        <!-- SOS HERO TRIGGER SECTION -->
         <section class="sos-section" *ngIf="!activeSOS()">
-            <button class="sos-button" [class.confirming]="confirmingSOS()" (click)="onSOSClick()">
-                <span *ngIf="!confirmingSOS()">SOS</span>
-                <span *ngIf="confirmingSOS()">{{ countdown() }}</span>
-            </button>
-            <br><br>
-            <p *ngIf="!confirmingSOS()" class="sos-tip">Press to trigger instant emergency dispatch</p>
-            <p *ngIf="confirmingSOS()" class="sos-confirm-text">
-                Tap again within {{ countdown() }}s to confirm emergency!
-            </p>
+            <div class="sos-ripple-container">
+                <div class="sos-pulse-ring ring-1"></div>
+                <div class="sos-pulse-ring ring-2"></div>
+                <button class="sos-button" [class.confirming]="confirmingSOS()" (click)="onSOSClick()" aria-label="Trigger Emergency SOS">
+                    <div class="sos-inner-content">
+                        <i class="fas fa-shield-virus" *ngIf="!confirmingSOS()"></i>
+                        <span class="sos-label" *ngIf="!confirmingSOS()">SOS</span>
+                        <span class="sos-countdown" *ngIf="confirmingSOS()">{{ countdown() }}</span>
+                        <small class="sos-sub" *ngIf="!confirmingSOS()">PRESS FOR HELP</small>
+                        <small class="sos-sub confirm-sub" *ngIf="confirmingSOS()">TAP TO CONFIRM</small>
+                    </div>
+                </button>
+            </div>
+            <div class="sos-caption-box">
+                <p *ngIf="!confirmingSOS()" class="sos-tip">
+                    <i class="fas fa-shield-alt"></i> 1-Tap Silent Alert to Emergency Network
+                </p>
+                <p *ngIf="confirmingSOS()" class="sos-confirm-text">
+                    ⚠️ Tap again within {{ countdown() }}s to confirm emergency!
+                </p>
+            </div>
         </section>
 
-        <!-- ONE-TAP EMERGENCY DIALERS -->
+        <!-- ONE-TAP EMERGENCY HELPLINES -->
         <section class="quick-dial-section">
+            <div class="section-header-flex">
+                <h2>⚡ Instant Helplines</h2>
+                <span class="section-badge">1-Tap Direct Call</span>
+            </div>
             <div class="quick-dial-grid">
                 <a *ngFor="let h of quickHelplines" [href]="'tel:' + h.number" class="dial-card">
-                    <i [class]="h.icon"></i>
-                    <div>
+                    <div class="dial-icon-circle"><i [class]="h.icon"></i></div>
+                    <div class="dial-info">
                         <h4>{{ h.name }}</h4>
                         <strong>{{ h.number }}</strong>
                     </div>
+                    <div class="dial-action-icon"><i class="fas fa-phone-alt"></i></div>
                 </a>
             </div>
         </section>
 
-        <!-- QUICK ACTION CARDS -->
-        <section>
-            <h2>Quick Actions</h2>
+        <!-- QUICK ACTION TILES -->
+        <section class="quick-actions-section">
+            <div class="section-header-flex">
+                <h2>Quick Actions</h2>
+            </div>
             <div class="action-grid">
-                <div class="action-card" routerLink="/safe-routes" style="cursor:pointer;">
-                    <i class="fas fa-route"></i>
+                <div class="action-card action-safe-routes" routerLink="/safe-routes">
+                    <div class="action-icon-circle icon-bg-purple"><i class="fas fa-route"></i></div>
                     <h3>Safe Routes</h3>
-                    <p class="action-desc">Navigate avoiding hotspots</p>
+                    <p class="action-desc">Safest well-lit paths</p>
                 </div>
-                <div class="action-card" routerLink="/contacts" style="cursor:pointer;">
-                    <i class="fas fa-user-plus"></i>
-                    <h3>Add Contact</h3>
-                    <p class="action-desc">Manage trusted network</p>
+                <div class="action-card action-contacts" routerLink="/contacts">
+                    <div class="action-icon-circle icon-bg-emerald"><i class="fas fa-user-plus"></i></div>
+                    <h3>Trusted Circle</h3>
+                    <p class="action-desc">Add emergency contacts</p>
                 </div>
-                <div class="action-card" (click)="shareLocation()" style="cursor:pointer;">
-                    <i class="fas fa-map-marker-alt"></i>
+                <div class="action-card action-share" (click)="shareLocation()">
+                    <div class="action-icon-circle icon-bg-blue"><i class="fas fa-map-marker-alt"></i></div>
                     <h3>Share Location</h3>
-                    <p class="action-desc">Send GPS to WhatsApp/SMS</p>
+                    <p class="action-desc">WhatsApp / SMS live GPS</p>
                 </div>
-                <div class="action-card" routerLink="/reports" style="cursor:pointer;">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>Report Incident</h3>
-                    <p class="action-desc">Flag unsafe zone or hazard</p>
+                <div class="action-card action-report" routerLink="/reports">
+                    <div class="action-icon-circle icon-bg-amber"><i class="fas fa-flag"></i></div>
+                    <h3>Report Hazard</h3>
+                    <p class="action-desc">Flag unsafe zone or lighting</p>
                 </div>
             </div>
         </section>
 
-        <p *ngIf="locationStatus" class="location-status-badge">{{ locationStatus }}</p>
+        <!-- LOCATION STATUS BADGE -->
+        <p *ngIf="locationStatus" class="location-status-badge">
+            <i class="fas fa-map-pin"></i> {{ locationStatus }}
+        </p>
 
-        <!-- SAFETY TIPS -->
+        <!-- SAFETY TIPS WIDGET -->
         <section class="tips-section">
-            <h2>Safety Tips</h2>
-            <div class="activity-card">
-                <i class="fas fa-lightbulb" style="color:#ffc107; margin-right:8px;"></i>
-                Always share your live location with trusted contacts when travelling alone or in unfamiliar areas at night.
+            <div class="safety-tip-card">
+                <div class="tip-icon"><i class="fas fa-lightbulb"></i></div>
+                <div class="tip-text">
+                    <strong>HerWatch Safety Tip</strong>
+                    <p>Always share your live journey when walking alone or travelling late at night. Keep your phone accessible.</p>
+                </div>
             </div>
         </section>
 
@@ -94,13 +144,15 @@
     <!-- DISARM MODAL -->
     <div class="modal-overlay" *ngIf="showDisarmModal">
         <div class="modal-card">
-            <i class="fas fa-shield-alt modal-icon"></i>
+            <div class="modal-badge-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
             <h2>Disarm Emergency SOS</h2>
-            <p>Enter your 4-digit security PIN to confirm you are safe.</p>
+            <p>Enter your 4-digit security PIN to confirm you are safe and conclude the alert.</p>
 
-            <div class="input-group">
+            <div class="pin-input-group">
                 <i class="fas fa-key"></i>
-                <input type="password" [(ngModel)]="disarmPin" placeholder="4-Digit PIN" maxlength="4" autofocus>
+                <input type="password" [(ngModel)]="disarmPin" placeholder="4-Digit PIN" maxlength="4" autofocus inputmode="numeric">
             </div>
 
             <p *ngIf="disarmError" class="modal-error">{{ disarmError }}</p>
