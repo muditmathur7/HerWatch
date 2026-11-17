@@ -6,43 +6,114 @@
 
         <div class="reports-container">
 
-            <h1>Report an Incident</h1>
+            <!-- HOTSPOT ALERT BANNER IF HOTSPOTS DETECTED -->
+            <section class="hotspot-summary-card" *ngIf="hotspots.length > 0">
+                <div class="hotspot-badge">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>{{ hotspots.length }} Safety Hotspots Identified</span>
+                </div>
+                <p>Caution advised in reported high-incident zones. Safe routes will prioritize avoiding these areas.</p>
+                <div class="hotspots-pill-list">
+                    <div *ngFor="let h of hotspots" class="hotspot-pill" [class]="'risk-' + h.riskLevel.toLowerCase()">
+                        <strong>{{ h.locationName }}</strong> ({{ h.incidentCount }} reports)
+                    </div>
+                </div>
+            </section>
 
-            <form (ngSubmit)="submitReport()">
+            <!-- REPORT INCIDENT FORM -->
+            <section class="report-form-card">
+                <h1>Report an Incident or Hazard</h1>
+                <p class="section-subtitle">Your report helps notify other women and emergency teams in the area.</p>
 
-                <div class="input-group">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <select [(ngModel)]="newReport.type" name="incidentType" required>
-                        <option value="">Select Incident Type</option>
-                        <option>Harassment</option>
-                        <option>Stalking</option>
-                        <option>Theft</option>
-                        <option>Unsafe Area</option>
-                        <option>Other</option>
-                    </select>
+                <form (ngSubmit)="submitReport()">
+
+                    <div class="input-group">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <select [(ngModel)]="newReport.incidentType" name="incidentType" required>
+                            <option value="">Select Incident / Hazard Type</option>
+                            <option *ngFor="let t of incidentTypes" [value]="t">{{ t }}</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" [(ngModel)]="newReport.locationName" name="locationName" placeholder="Incident Location / Landmark" required>
+                    </div>
+
+                    <!-- GPS AUTO-DETECT BUTTON -->
+                    <div class="gps-attach-row">
+                        <button type="button" class="gps-btn" (click)="detectLocation()">
+                            <i class="fas fa-crosshairs"></i> Tag My Current GPS Location
+                        </button>
+                        <span *ngIf="locationStatus" class="gps-status">{{ locationStatus }}</span>
+                    </div>
+
+                    <div class="severity-selection">
+                        <label>Severity Level:</label>
+                        <div class="severity-options">
+                            <label class="severity-radio">
+                                <input type="radio" [(ngModel)]="newReport.severity" name="severity" value="Low">
+                                <span class="tag low">Low</span>
+                            </label>
+                            <label class="severity-radio">
+                                <input type="radio" [(ngModel)]="newReport.severity" name="severity" value="Medium">
+                                <span class="tag medium">Medium</span>
+                            </label>
+                            <label class="severity-radio">
+                                <input type="radio" [(ngModel)]="newReport.severity" name="severity" value="High">
+                                <span class="tag high">High</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="input-group" style="margin-top:15px;">
+                        <textarea [(ngModel)]="newReport.description" name="description" placeholder="Describe what happened or why the area is unsafe..." rows="4" required></textarea>
+                    </div>
+
+                    <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+                    <p *ngIf="successMessage" class="success-msg">{{ successMessage }}</p>
+
+                    <button type="submit" class="auth-btn" [disabled]="isSubmitting">
+                        {{ isSubmitting ? 'Submitting Report...' : 'Submit Incident Report' }}
+                    </button>
+
+                </form>
+            </section>
+
+            <!-- RECENT REPORTS LIST -->
+            <section class="recent-reports-section">
+                <h2>Community Reports ({{ reports.length }})</h2>
+
+                <div *ngIf="isLoading" class="loading-state">
+                    <i class="fas fa-spinner fa-spin"></i> Loading reports...
                 </div>
 
-                <div class="input-group">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <input type="text" [(ngModel)]="newReport.location" name="incidentLocation" placeholder="Location" required>
-                </div>
+                <div class="reports-list" *ngIf="!isLoading">
+                    <div class="report-card" *ngFor="let r of reports">
+                        <div class="report-header">
+                            <div class="report-title-area">
+                                <h3>{{ r.incidentType }}</h3>
+                                <span class="location-tag">
+                                    <i class="fas fa-map-marker-alt"></i> {{ r.locationName }}
+                                </span>
+                            </div>
+                            <span class="severity-pill" [ngClass]="getSeverityClass(r.severity)">
+                                {{ r.severity }}
+                            </span>
+                        </div>
+                        <p class="report-desc">{{ r.description }}</p>
+                        <small class="report-time">
+                            <i class="fas fa-clock"></i> {{ r.createdAt | date:'medium' }}
+                        </small>
+                    </div>
 
-                <div class="input-group">
-                    <textarea [(ngModel)]="newReport.description" name="incidentDescription" placeholder="Describe the incident..." rows="5" required></textarea>
+                    <div class="activity-card empty-state" *ngIf="reports.length === 0">
+                        <i class="fas fa-shield-alt"></i>
+                        <p>No incidents reported yet.</p>
+                        <small>Reports made by you and others in the area will appear here to keep everyone informed.</small>
+                    </div>
                 </div>
-
-                <button type="submit" class="auth-btn">Submit Report</button>
-
-            </form>
-
-            <div class="reports-list">
-                <div class="report-card" *ngFor="let r of reports">
-                    <strong>{{ r.type }}</strong> at {{ r.location }} — {{ r.description }}
-                </div>
-                <div class="activity-card" *ngIf="reports.length === 0">
-                    No reports submitted yet.
-                </div>
-            </div>
+            </section>
 
         </div>
 

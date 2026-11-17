@@ -11,6 +11,11 @@ from app.schemas.contact import (
     ContactUpdate,
     ContactResponse
 )
+from app.schemas.incident import (
+    IncidentCreate,
+    IncidentResponse,
+    HotspotZone
+)
 
 __all__ = [
     "UserRegister",
@@ -21,5 +26,8 @@ __all__ = [
     "TokenResponse",
     "ContactCreate",
     "ContactUpdate",
-    "ContactResponse"
+    "ContactResponse",
+    "IncidentCreate",
+    "IncidentResponse",
+    "HotspotZone"
 ]
