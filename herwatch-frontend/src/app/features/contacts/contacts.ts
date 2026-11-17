@@ -31,6 +31,34 @@ export class ContactsComponent implements OnInit {
     { name: 'Child / Family Helpline', number: '1098', icon: 'fas fa-hands-helping', color: '#4cd964' }
   ];
 
+  get shieldScore(): number {
+    if (this.contacts.length === 0) return 0;
+    if (this.contacts.length === 1) return 35;
+    if (this.contacts.length === 2) return 70;
+    return 100;
+  }
+
+  get shieldLevel(): string {
+    if (this.contacts.length === 0) return 'Vulnerable';
+    if (this.contacts.length === 1) return 'Low Protection';
+    if (this.contacts.length === 2) return 'Moderate Protection';
+    return 'Safety Shield Active';
+  }
+
+  get shieldColor(): string {
+    if (this.contacts.length === 0) return '#ef4444';
+    if (this.contacts.length === 1) return '#f97316';
+    if (this.contacts.length === 2) return '#eab308';
+    return '#10b981';
+  }
+
+  get shieldAdvice(): string {
+    if (this.contacts.length === 0) return 'Add at least 3 contacts for emergency alert redundancy.';
+    if (this.contacts.length === 1) return 'Add 2 more contacts to activate multi-contact alert backup.';
+    if (this.contacts.length === 2) return 'Add 1 more contact to complete your 3-contact Safety Shield.';
+    return 'Excellent! Emergency calls and live tracking will notify your trusted circle.';
+  }
+
   constructor(private contactService: ContactService) {}
 
   ngOnInit(): void {

@@ -13,6 +13,7 @@ import { ReportsComponent } from './features/reports/reports';
 import { SettingsComponent } from './features/settings/settings';
 import { TermsComponent } from './features/terms/terms';
 import { SafeRoutesComponent } from './features/safe-routes/safe-routes';
+import { TrackComponent } from './features/track/track';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -29,5 +30,7 @@ export const routes: Routes = [
   { path: 'reports', component: ReportsComponent, canActivate: [authGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [authGuard] },
   { path: 'terms', component: TermsComponent, canActivate: [authGuard] },
+  // Public Tracking Screen for Emergency Contacts (no login required)
+  { path: 'track/:sosId', component: TrackComponent },
   { path: '**', redirectTo: '' }
 ];

@@ -1,0 +1,93 @@
+<div class="track-screen-container">
+
+    <!-- TOP EMERGENCY ALERT BAR -->
+    <header class="track-header" [class.resolved]="trackingDetail?.alert?.status === 'RESOLVED'">
+        <div class="alert-icon-wrap">
+            <i class="fas fa-exclamation-triangle pulse-slow" *ngIf="trackingDetail?.alert?.status === 'ACTIVE'"></i>
+            <i class="fas fa-check-circle" *ngIf="trackingDetail?.alert?.status === 'RESOLVED'"></i>
+        </div>
+        <div class="header-titles">
+            <h1>
+                <span *ngIf="trackingDetail?.alert?.status === 'ACTIVE'">🚨 LIVE EMERGENCY TRACKING</span>
+                <span *ngIf="trackingDetail?.alert?.status === 'RESOLVED'">✅ EMERGENCY RESOLVED / USER IS SAFE</span>
+            </h1>
+            <p>
+                <strong>{{ trackingDetail?.alert?.userName }}</strong>
+                <span *ngIf="trackingDetail?.alert?.status === 'ACTIVE'"> has triggered an emergency SOS!</span>
+                <span *ngIf="trackingDetail?.alert?.status === 'RESOLVED'"> is safe and disarmed this alert.</span>
+            </p>
+        </div>
+    </header>
+
+    <div class="track-main-layout">
+
+        <!-- RESCUE ACTION CONTROLS -->
+        <aside class="rescue-control-card">
+
+            <div class="victim-badge">
+                <div class="avatar"><i class="fas fa-user-shield"></i></div>
+                <div class="victim-meta">
+                    <h2>{{ trackingDetail?.alert?.userName }}</h2>
+                    <span class="status-pill" [class.active-pill]="trackingDetail?.alert?.status === 'ACTIVE'">
+                        {{ trackingDetail?.alert?.status }}
+                    </span>
+                </div>
+            </div>
+
+            <!-- KEY TELEMETRY -->
+            <div class="telemetry-grid">
+                <div class="telemetry-box">
+                    <small>Elapsed Time</small>
+                    <strong>{{ elapsedTime }}</strong>
+                </div>
+                <div class="telemetry-box">
+                    <small>GPS Accuracy</small>
+                    <strong style="color:#10b981;">±5m (High)</strong>
+                </div>
+                <div class="telemetry-box" *ngIf="trackingDetail?.alert?.batteryLevel">
+                    <small>Battery</small>
+                    <strong>{{ trackingDetail?.alert?.batteryLevel }}%</strong>
+                </div>
+                <div class="telemetry-box">
+                    <small>Contacts Alerted</small>
+                    <strong>{{ trackingDetail?.alert?.notifiedContactsCount }} notified</strong>
+                </div>
+            </div>
+
+            <!-- ONE-TAP RESCUE ACTIONS -->
+            <div class="action-buttons-group">
+                <!-- OPEN GOOGLE MAPS NAVIGATION -->
+                <a [href]="getGoogleMapsDirectionsUrl()" target="_blank" class="nav-google-btn">
+                    <i class="fas fa-directions"></i>
+                    <div>
+                        <strong>Navigate to Her</strong>
+                        <small>Turn-by-turn Google Maps Directions</small>
+                    </div>
+                </a>
+
+                <!-- CALL VICTIM -->
+                <a *ngIf="trackingDetail?.alert?.userPhone" [href]="'tel:' + trackingDetail?.alert?.userPhone" class="call-action-btn phone">
+                    <i class="fas fa-phone-alt"></i> Call {{ trackingDetail?.alert?.userName }} ({{ trackingDetail?.alert?.userPhone }})
+                </a>
+
+                <!-- CALL POLICE -->
+                <a href="tel:112" class="call-action-btn police">
+                    <i class="fas fa-shield-alt"></i> Call Police Emergency (112)
+                </a>
+            </div>
+
+            <div class="live-status-footer">
+                <span class="live-indicator"></span>
+                <span>Live GPS WebSocket Connected</span>
+            </div>
+
+        </aside>
+
+        <!-- LIVE MAP CONTAINER -->
+        <main class="map-view-panel">
+            <div id="track-map" class="live-track-map"></div>
+        </main>
+
+    </div>
+
+</div>

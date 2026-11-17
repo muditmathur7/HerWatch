@@ -21,6 +21,21 @@
                 </div>
             </section>
 
+            <!-- SAFETY SHIELD SCORE BANNER -->
+            <section class="safety-shield-card" [style.border-left-color]="shieldColor">
+                <div class="shield-top-row">
+                    <div class="shield-badge" [style.background]="shieldColor">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>{{ shieldLevel }} ({{ shieldScore }}%)</span>
+                    </div>
+                    <span class="contacts-count-tag">{{ contacts.length }} Contact(s) Registered</span>
+                </div>
+                <div class="shield-progress-track">
+                    <div class="shield-progress-bar" [style.width.%]="shieldScore" [style.background]="shieldColor"></div>
+                </div>
+                <p class="shield-advice">{{ shieldAdvice }}</p>
+            </section>
+
             <!-- ADD TRUSTED CONTACT -->
             <section class="add-contact-section">
                 <h1>Emergency Contacts</h1>

@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SOSAlert, SOSTriggerRequest, SOSLocationPing, SOSTrackingDetail } from '../../shared/interfaces/sos.interface';
+import { SOSAlert, SOSTriggerRequest, SOSLocationPing, SOSTrackingDetail, LocationLog } from '../../shared/interfaces/sos.interface';
 import { environment } from '../../../environments/environment';
 
-export type { SOSAlert, SOSTriggerRequest, SOSLocationPing, SOSTrackingDetail };
+export type { SOSAlert, SOSTriggerRequest, SOSLocationPing, SOSTrackingDetail, LocationLog };
 
 @Injectable({ providedIn: 'root' })
 export class SosService {

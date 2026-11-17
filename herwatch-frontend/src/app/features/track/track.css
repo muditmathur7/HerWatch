@@ -1,0 +1,285 @@
+.track-screen-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0f172a;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.track-header {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+    z-index: 10;
+}
+
+.track-header.resolved {
+    background: linear-gradient(135deg, #059669, #047857);
+    box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+}
+
+.alert-icon-wrap i {
+    font-size: 38px;
+    color: #fef08a;
+}
+
+.pulse-slow {
+    animation: alertPulse 1.5s infinite;
+}
+
+@keyframes alertPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.header-titles h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.header-titles p {
+    font-size: 14px;
+    color: #fecaca;
+    margin: 0;
+}
+
+.track-header.resolved p {
+    color: #d1fae5;
+}
+
+/* MAIN LAYOUT */
+.track-main-layout {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    height: calc(100vh - 84px);
+}
+
+@media (max-width: 900px) {
+    .track-main-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+}
+
+/* SIDEBAR CONTROLS */
+.rescue-control-card {
+    background: #1e293b;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    z-index: 5;
+}
+
+.victim-badge {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #334155;
+}
+
+.victim-badge .avatar i {
+    font-size: 44px;
+    color: #60a5fa;
+}
+
+.victim-meta h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.status-pill {
+    background: #334155;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-pill.active-pill {
+    background: #dc2626;
+    color: #fff;
+    animation: flash 1s infinite alternate;
+}
+
+/* TELEMETRY */
+.telemetry-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.telemetry-box {
+    background: #0f172a;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+}
+
+.telemetry-box small {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+    margin-bottom: 4px;
+}
+
+.telemetry-box strong {
+    font-size: 15px;
+    color: #f1f5f9;
+}
+
+/* ACTION BUTTONS */
+.action-buttons-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.nav-google-btn {
+    background: #10b981;
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 20px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.nav-google-btn:hover {
+    background: #059669;
+    transform: translateY(-2px);
+}
+
+.nav-google-btn i {
+    font-size: 26px;
+}
+
+.nav-google-btn strong {
+    font-size: 16px;
+    display: block;
+}
+
+.nav-google-btn small {
+    font-size: 11px;
+    color: #d1fae5;
+}
+
+.call-action-btn {
+    padding: 14px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s;
+}
+
+.call-action-btn.phone {
+    background: #2563eb;
+    color: #fff;
+}
+
+.call-action-btn.police {
+    background: #dc2626;
+    color: #fff;
+}
+
+.call-action-btn:hover {
+    transform: translateY(-2px);
+}
+
+.live-status-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #10b981;
+    margin-top: auto;
+    padding-top: 15px;
+}
+
+.live-indicator {
+    width: 10px;
+    height: 10px;
+    background: #10b981;
+    border-radius: 50%;
+    animation: livePulse 1s infinite alternate;
+}
+
+/* MAP */
+.map-view-panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.live-track-map {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+/* VICTIM PULSE PIN */
+::ng-deep .victim-location-marker {
+    position: relative;
+}
+
+::ng-deep .victim-pin-wrap {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .victim-dot {
+    width: 24px;
+    height: 24px;
+    background: #dc2626;
+    color: #fff;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+::ng-deep .victim-pulse {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    background: rgba(220, 38, 38, 0.4);
+    border-radius: 50%;
+    animation: victimPulseAnim 1.4s infinite;
+    z-index: 1;
+}
+
+@keyframes victimPulseAnim {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(1.8); opacity: 0; }
+}

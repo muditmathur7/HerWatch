@@ -1,0 +1,50 @@
+.sidebar-tools {
+    margin-top: 35px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tool-btn {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.stealth-tool-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px dashed rgba(255, 255, 255, 0.4);
+}
+
+.stealth-tool-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.siren-tool-btn {
+    background: rgba(255, 59, 48, 0.25);
+    color: #fffa65;
+    border: 1px solid rgba(255, 59, 48, 0.5);
+}
+
+.siren-tool-btn:hover {
+    background: rgba(255, 59, 48, 0.4);
+    transform: translateY(-2px);
+}
+
+.siren-tool-btn.siren-on {
+    background: #ff3b30;
+    color: #fff;
+    animation: flash 0.5s infinite alternate;
+}

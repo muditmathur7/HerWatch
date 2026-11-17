@@ -15,4 +15,15 @@
         <li><a (click)="onLogout()" style="cursor:pointer"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </ul>
 
+    <!-- STEALTH & DETERRENT TOOLS -->
+    <div class="sidebar-tools">
+        <button class="tool-btn stealth-tool-btn" (click)="stealth.activateStealth()" title="Disguise screen as functional calculator">
+            <i class="fas fa-calculator"></i> Disguise Screen
+        </button>
+        <button class="tool-btn siren-tool-btn" [class.siren-on]="stealth.isSirenActive()" (click)="stealth.toggleSiren()" title="Loud audible alarm for public deterrence">
+            <i class="fas" [class.fa-bullhorn]="!stealth.isSirenActive()" [class.fa-volume-mute]="stealth.isSirenActive()"></i>
+            {{ stealth.isSirenActive() ? 'Stop Siren' : 'Loud Siren' }}
+        </button>
+    </div>
+
 </aside>

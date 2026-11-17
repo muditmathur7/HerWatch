@@ -1,0 +1,40 @@
+<div class="calculator-overlay">
+
+    <div class="calc-wrapper">
+
+        <!-- SUBTLE BACKGROUND MONITOR INDICATOR (Undetectable dot in corner) -->
+        <div class="secret-shield-dot" title="Triple tap AC or type 911= to return"></div>
+
+        <div class="calc-screen">
+            <span class="calc-digits">{{ display }}</span>
+        </div>
+
+        <div class="calc-keypad">
+            <button class="calc-btn top-row" (click)="pressAC()">AC</button>
+            <button class="calc-btn top-row" (click)="pressPlusMinus()">±</button>
+            <button class="calc-btn top-row" (click)="pressPercent()">%</button>
+            <button class="calc-btn op-row" (click)="pressOp('÷')">÷</button>
+
+            <button class="calc-btn num" (click)="pressNum('7')">7</button>
+            <button class="calc-btn num" (click)="pressNum('8')">8</button>
+            <button class="calc-btn num" (click)="pressNum('9')">9</button>
+            <button class="calc-btn op-row" (click)="pressOp('×')">×</button>
+
+            <button class="calc-btn num" (click)="pressNum('4')">4</button>
+            <button class="calc-btn num" (click)="pressNum('5')">5</button>
+            <button class="calc-btn num" (click)="pressNum('6')">6</button>
+            <button class="calc-btn op-row" (click)="pressOp('-')">-</button>
+
+            <button class="calc-btn num" (click)="pressNum('1')">1</button>
+            <button class="calc-btn num" (click)="pressNum('2')">2</button>
+            <button class="calc-btn num" (click)="pressNum('3')">3</button>
+            <button class="calc-btn op-row" (click)="pressOp('+')">+</button>
+
+            <button class="calc-btn num zero" (click)="pressNum('0')">0</button>
+            <button class="calc-btn num" (click)="pressDot()">.</button>
+            <button class="calc-btn op-row" (click)="pressEquals()">=</button>
+        </div>
+
+    </div>
+
+</div>
